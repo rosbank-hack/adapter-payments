@@ -1,6 +1,4 @@
 ext {
-    springDataRedisVersion = "2.1.10.RELEASE"
-    jedisVersion = "2.9.0"
     gsonVersion = "2.8.5"
     guavaVersion = "23.0"
     commonsLangVersion = "3.7"
@@ -13,7 +11,6 @@ ext {
     sunXmlBindVersion = "2.4.0-b180830.0438"
     javaxXmlBindVersion = "2.4.0-b180830.0359"
     sunIstackVersion = "3.0.8"
-    h2Version = "1.4.199"
     jSoupVersion = "1.11.3"
     sendGridVersion = "4.1.2"
     javaxMailVersion = "1.4"

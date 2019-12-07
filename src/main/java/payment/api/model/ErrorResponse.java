@@ -1,4 +1,4 @@
-package transactions.api.model;
+package payment.api.model;
 
 import lombok.Data;
 

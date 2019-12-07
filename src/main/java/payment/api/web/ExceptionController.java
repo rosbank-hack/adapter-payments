@@ -1,6 +1,7 @@
-package transactions.api.web;
+package payment.api.web;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.slf4j.Logger;
@@ -15,10 +16,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-import transactions.api.model.ErrorResponse;
+import payment.api.model.ErrorResponse;
 
 import javax.annotation.Nonnull;
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -96,9 +96,9 @@ public class ExceptionController {
         return new ErrorResponse(exception.getMessage());
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ErrorResponse handleNotFound(EntityNotFoundException exception) {
+    @ExceptionHandler(JsonProcessingException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorResponse kafkaProducingError(JsonProcessingException exception) {
         return new ErrorResponse(exception.getMessage());
     }
 
