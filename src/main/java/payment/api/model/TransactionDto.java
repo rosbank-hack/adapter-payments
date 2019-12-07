@@ -14,7 +14,8 @@ public class TransactionDto {
     private final UUID providerUid;
     private final BigDecimal amount;
     private final String currency;
-    private final TransactionExtendedStatus status;
+    private final TransactionStatus status;
+    private final TransactionExtendedStatus extendedStatus;
     private final Date date;
     private final String comment;
     private final UUID sourceUid;

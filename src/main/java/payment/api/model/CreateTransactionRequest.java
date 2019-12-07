@@ -14,7 +14,8 @@ public class CreateTransactionRequest {
     private UUID providerUid;
     private BigDecimal amount;
     private String currency;
-    private TransactionExtendedStatus status;
+    private TransactionStatus status;
+    private TransactionExtendedStatus extendedStatus;
     private Date date;
     private String comment;
     private UUID sourceUid;

@@ -11,6 +11,7 @@ public class TransactionMapper {
                 transactionRequest.getAmount(),
                 transactionRequest.getCurrency(),
                 transactionRequest.getStatus(),
+                transactionRequest.getExtendedStatus(),
                 transactionRequest.getDate(),
                 transactionRequest.getComment(),
                 transactionRequest.getSourceUid(),

@@ -25,6 +25,7 @@ public class OperationMapper {
         paymentResponse.put("providerUid", transaction.getUserUid().toString());
         paymentResponse.put("currency", transaction.getCurrency());
         paymentResponse.put("status", transaction.getStatus().name());
+        paymentResponse.put("extendedStatus", transaction.getExtendedStatus().name());
         paymentResponse.put("date", new SimpleDateFormat(DATE_FORMAT).format(transaction.getDate()));
         paymentResponse.put("amount", transaction.getAmount().toString());
         paymentResponse.put("comment", transaction.getComment());
