@@ -18,6 +18,9 @@ public class KafkaProperties {
     private String providerTopic;
 
     @NotBlank
+    private String eventTopic;
+
+    @NotBlank
     private String bootstrapServersConfig;
 
     @NotBlank

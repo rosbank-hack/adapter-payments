@@ -39,12 +39,14 @@ public class OperationMapper {
                         .build()
         );
 
-        paymentServiceInfo.put(
-                requestedService,
-                Service.builder()
-                        .request(requestedData)
-                        .build()
-        );
+        if (requestedService != null) {
+            paymentServiceInfo.put(
+                    requestedService,
+                    Service.builder()
+                            .request(requestedData)
+                            .build()
+            );
+        }
 
         return Operation.builder()
                 .publisher(publisher)

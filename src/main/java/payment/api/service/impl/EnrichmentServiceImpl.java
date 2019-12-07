@@ -34,6 +34,17 @@ public class EnrichmentServiceImpl implements EnrichmentService {
     public void enrichTransaction(@Nonnull TransactionDto transaction) {
         String operationId = UUID.randomUUID().toString();
 
+        //to events
+        sendOperationToKafka(
+                kafkaProperties.getEventTopic(),
+                operationId,
+                null,
+                null,
+                transaction
+        );
+
+        //to provider
+
         sendOperationToKafka(
                 kafkaProperties.getProviderTopic(),
                 operationId,
@@ -42,6 +53,7 @@ public class EnrichmentServiceImpl implements EnrichmentService {
                 transaction
         );
 
+        //to bonus
         Map<String, String> bonusRequestData = new HashMap<>();
         bonusRequestData.put("providerId", transaction.getProviderUid().toString());
         bonusRequestData.put("userId", transaction.getUserUid().toString());
