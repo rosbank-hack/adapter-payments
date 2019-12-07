@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static payment.api.consts.Constants.DATE_FORMAT;
+
 public class OperationMapper {
     public static Operation toOperation(
             String publisher,
@@ -23,7 +25,7 @@ public class OperationMapper {
         paymentResponse.put("providerUid", transaction.getUserUid().toString());
         paymentResponse.put("currency", transaction.getCurrency());
         paymentResponse.put("status", transaction.getStatus().name());
-        paymentResponse.put("date", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(transaction.getDate()));
+        paymentResponse.put("date", new SimpleDateFormat(DATE_FORMAT).format(transaction.getDate()));
         paymentResponse.put("amount", transaction.getAmount().toString());
         paymentResponse.put("comment", transaction.getComment());
         paymentResponse.put("sourceId", transaction.getSourceUid().toString());
@@ -47,7 +49,6 @@ public class OperationMapper {
         return Operation.builder()
                 .publisher(publisher)
                 .initiator(initiator)
-                .mcc(null)
                 .operationId(operationUid)
                 .requiredServices(requiredServices)
                 .userId(transaction.getUserUid().toString())

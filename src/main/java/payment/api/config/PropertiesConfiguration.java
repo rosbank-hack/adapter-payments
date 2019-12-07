@@ -5,8 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableConfigurationProperties({
-        KafkaProperties.class,
-        ApplicationProperties.class
+        KafkaProperties.class
 })
 public class PropertiesConfiguration {
 }
