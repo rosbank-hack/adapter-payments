@@ -81,6 +81,7 @@ public class TransactionServiceImpl
     @Nonnull
     private Map<String, String> buildPaymentsResponse(@Nonnull CreateTransactionRequest request) {
         final Map<String, String> response = newHashMap();
+        response.put("name", request.getName());
         response.put("userUid", request.getUserUid());
         response.put("providerUid", request.getProviderUid());
         response.put("currency", request.getCurrency());
@@ -88,7 +89,6 @@ public class TransactionServiceImpl
         response.put("extendedStatus", request.getExtendedStatus().name());
         response.put("date", new SimpleDateFormat(DATE_FORMAT).format(new Date()));
         response.put("amount", request.getAmount().toString());
-        response.put("comment", request.getComment());
         response.put("sourceId", request.getSourceUid());
         response.put("sourceName", request.getSourceName());
         return response;

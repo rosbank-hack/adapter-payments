@@ -13,6 +13,8 @@ import java.math.BigDecimal;
 @Data
 public class CreateTransactionRequest {
     @NotEmpty
+    private String name;
+    @NotEmpty
     private String userUid;
     @NotEmpty
     private String providerUid;
@@ -30,5 +32,4 @@ public class CreateTransactionRequest {
     private String sourceUid;
     @NotNull
     private String sourceName;
-    private String comment;
 }
