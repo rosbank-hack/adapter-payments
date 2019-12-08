@@ -2,7 +2,8 @@ package payment.api.service;
 
 import com.github.voteva.Operation;
 
-public interface KafkaProducerService {
+import javax.annotation.Nonnull;
 
-    void send(String topic, Operation operation);
+public interface KafkaProducerService {
+    void send(@Nonnull String topic, @Nonnull Operation operation);
 }

@@ -10,19 +10,25 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import payment.api.service.KafkaProducerService;
 
-@Service
+import javax.annotation.Nonnull;
+
 @Slf4j
+@Service
 @RequiredArgsConstructor
-public class KafkaProducerServiceImpl implements KafkaProducerService {
+public class KafkaProducerServiceImpl
+        implements KafkaProducerService {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final ObjectMapper objectMapper;
 
     @Override
     @SneakyThrows(JsonProcessingException.class)
-    public void send(String topic, Operation operation) {
-        String json = objectMapper.writeValueAsString(operation);
-        log.debug(json);
-        kafkaTemplate.send(topic, json);
+    public void send(@Nonnull String topic, @Nonnull Operation operation) {
+        final String data = objectMapper.writeValueAsString(operation);
+
+        if (log.isDebugEnabled()) {
+            log.debug(data);
+        }
+        kafkaTemplate.send(topic, data);
     }
 }

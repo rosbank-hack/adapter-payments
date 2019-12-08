@@ -10,9 +10,11 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.transaction.KafkaTransactionManager;
 import org.springframework.transaction.support.AbstractPlatformTransactionManager;
+import payment.api.config.properties.KafkaProperties;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import static com.google.common.collect.Maps.newHashMap;
 
 @Configuration
 @RequiredArgsConstructor
@@ -23,7 +25,7 @@ public class KafkaProducerConfiguration {
 
     @Bean
     public DefaultKafkaProducerFactory<String, String> producerFactory() {
-        Map<String, Object> configProps = new HashMap<>();
+        Map<String, Object> configProps = newHashMap();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, properties.getBootstrapServersConfig());
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -48,5 +50,4 @@ public class KafkaProducerConfiguration {
         ktm.setTransactionSynchronization(AbstractPlatformTransactionManager.SYNCHRONIZATION_ON_ACTUAL_TRANSACTION);
         return ktm;
     }
-
 }

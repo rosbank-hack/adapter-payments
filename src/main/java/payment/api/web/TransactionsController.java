@@ -1,33 +1,27 @@
 package payment.api.web;
 
-import io.swagger.annotations.ApiResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import payment.api.mapper.TransactionMapper;
-import payment.api.service.EnrichmentService;
 import payment.api.model.CreateTransactionRequest;
+import payment.api.service.TransactionService;
+
+import javax.validation.Valid;
 
 @RestController
-@RequestMapping(path = "/api/transactions", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequiredArgsConstructor
+@RequestMapping(path = "/api/v1/transactions")
 public class TransactionsController {
 
-    private EnrichmentService enrichmentService;
+    private final TransactionService transactionService;
 
-    @Autowired
-    public TransactionsController(EnrichmentService enrichmentService) {
-        this.enrichmentService = enrichmentService;
-    }
-
-    @PostMapping("/create")
-    @ApiResponse(code = 204, message = "No content")
-    public ResponseEntity createTransaction(@RequestBody CreateTransactionRequest request) {
-        enrichmentService.enrichTransaction(TransactionMapper.toTransactionDto(request));
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createTransaction(@RequestBody @Valid CreateTransactionRequest request) {
+        transactionService.createTransaction(request);
     }
 }

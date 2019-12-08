@@ -1,4 +1,4 @@
-package payment.api.config;
+package payment.api.config.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
