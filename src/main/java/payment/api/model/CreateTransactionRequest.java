@@ -9,7 +9,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Data
 public class CreateTransactionRequest {
@@ -28,7 +27,7 @@ public class CreateTransactionRequest {
     @NotNull
     private TransactionExtendedStatus extendedStatus;
     @NotNull
-    private UUID sourceUid;
+    private String sourceUid;
     @NotNull
     private String sourceName;
     private String comment;

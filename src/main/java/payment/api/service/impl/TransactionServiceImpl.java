@@ -45,9 +45,15 @@ public class TransactionServiceImpl
     @Nonnull
     private Operation buildOperation(@Nonnull CreateTransactionRequest request) {
         final Map<String, Service> services = newHashMap();
-        services.put(SERVICE_NAME, new Service().setResponse(buildPaymentsResponse(request)));
-        services.put(PROVIDER_SERVICE_NAME, new Service().setRequest(buildProviderRequest(request)));
-        services.put(BONUS_SERVICE_NAME, new Service().setRequest(buildBonusRequest(request)));
+        services.put(SERVICE_NAME, new Service()
+                .setRequest(newHashMap())
+                .setResponse(buildPaymentsResponse(request)));
+        services.put(PROVIDER_SERVICE_NAME, new Service()
+                .setRequest(buildProviderRequest(request))
+                .setResponse(newHashMap()));
+        services.put(BONUS_SERVICE_NAME, new Service()
+                .setRequest(buildBonusRequest(request))
+                .setResponse(newHashMap()));
 
         return new Operation()
                 .setInitiator(SERVICE_NAME)
@@ -83,7 +89,7 @@ public class TransactionServiceImpl
         response.put("date", new SimpleDateFormat(DATE_FORMAT).format(new Date()));
         response.put("amount", request.getAmount().toString());
         response.put("comment", request.getComment());
-        response.put("sourceId", request.getSourceUid().toString());
+        response.put("sourceId", request.getSourceUid());
         response.put("sourceName", request.getSourceName());
         return response;
     }
